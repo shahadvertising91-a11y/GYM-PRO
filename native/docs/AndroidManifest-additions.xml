@@ -1,0 +1,13 @@
+<!-- inside <manifest> (scripts/patch_android.py adds these automatically) -->
+<uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />        <!-- runtime permission, Android 10+ -->
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />   <!-- Android 14+ -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />          <!-- runtime permission, Android 13+ -->
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<uses-feature android:name="android.hardware.sensor.stepcounter" android:required="false" />
+
+<!-- inside <application> -->
+<service android:name="com.forge.bar.StepService"
+         android:exported="false"
+         android:foregroundServiceType="health" />
+<receiver android:name="com.forge.bar.BootReceiver" android:exported="false"><intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter></receiver>
